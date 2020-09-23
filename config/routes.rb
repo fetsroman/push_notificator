@@ -13,5 +13,6 @@ Rails.application.routes.draw do
     post '/sign_in', to: 'authentication#sign_in'
 
     resources :devices, only: [:create]
+    resources :notes, only: [:create]
   end
 end
