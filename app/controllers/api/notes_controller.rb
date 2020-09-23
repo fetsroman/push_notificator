@@ -5,6 +5,7 @@ class Api::NotesController < ApiController
     @note = @current_user.notes.create(note_params)
 
     if @note.save
+      PushNotificationWorker.perform_at(@note.push_time, @note.id)
       render json: @note, status: :created
     else
       render json: @note.errors, status: :unprocessable_entity
